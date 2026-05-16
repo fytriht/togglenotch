@@ -7,11 +7,35 @@ It does not draw an overlay or run a background process. When hiding the notch, 
 ## Usage
 
 ```sh
-swift run togglenotch status
-swift run togglenotch hide
-swift run togglenotch show
-swift run togglenotch toggle
-swift run togglenotch list
+togglenotch status
+togglenotch hide
+togglenotch show
+togglenotch toggle
+togglenotch list
+```
+
+## Install
+
+Install to a writable bin directory that is already in `PATH` when possible:
+
+```sh
+scripts/install.sh
+```
+
+On Apple Silicon Macs with Homebrew, this usually installs to `/opt/homebrew/bin/togglenotch`. If no writable common `PATH` directory is found, it falls back to `~/.local/bin/togglenotch` and prints a `PATH` warning.
+
+Then run:
+
+```sh
+togglenotch status
+togglenotch hide
+togglenotch show
+```
+
+To install somewhere else:
+
+```sh
+PREFIX=/opt/homebrew scripts/install.sh
 ```
 
 ## How It Works
@@ -44,4 +68,5 @@ Hidden: 1512x945 logical, 3024x1890 pixels
 ```sh
 swift build
 swift test
+swift run togglenotch status
 ```
