@@ -26,12 +26,12 @@ enum CLIError: Error, CustomStringConvertible {
 }
 
 let usageText = """
-Usage: togglenotch <command>
+Usage: togglenotch [command]
 
 Commands:
   hide      Switch the built-in display to the lower-height mode below the camera area.
   show      Restore the saved full-height mode, or choose the matching highest mode.
-  toggle    Hide if full-height, show if hidden.
+  toggle    Hide if full-height, show if hidden. This is the default with no command.
   status    Print the current mode and notch state.
   list      List available built-in display modes.
 """
@@ -113,11 +113,11 @@ extension DisplayModeInfo {
 }
 
 func run(arguments: [String]) throws {
-    guard arguments.count == 2 else {
+    guard arguments.count <= 2 else {
         throw CLIError.usage
     }
 
-    let command = arguments[1]
+    let command = arguments.count == 1 ? "toggle" : arguments[1]
     let controller = DisplayController()
     let displayID = try controller.builtinDisplayID()
     let current = try controller.currentMode(for: displayID)
